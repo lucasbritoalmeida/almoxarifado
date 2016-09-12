@@ -60,6 +60,7 @@ public class Main extends javax.swing.JFrame {
         jMenu8 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem10 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -182,6 +183,7 @@ public class Main extends javax.swing.JFrame {
         jMenu8.add(jMenuItem9);
 
         jMenu4.add(jMenu8);
+        jMenu4.add(jSeparator4);
 
         jMenuItem10.setText("Relatorios");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -368,6 +370,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

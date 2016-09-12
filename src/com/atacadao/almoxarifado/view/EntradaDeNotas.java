@@ -372,7 +372,7 @@ public class EntradaDeNotas extends javax.swing.JInternalFrame {
         if (!equipamentos.isEmpty() & !txtNumeroNota.getText().trim().equals("")) {
             equipamentoConexao.CasdastrarVarios(equipamentos);
             registroConexao.Cadastrar(txtNumeroNota.getText(),txtFornecedor.getText(),FormatandoDouble.FormatandoValores(txtCusto.getText()),
-                    FormatosDeData.formatarLongParaDatas(txtFrtDtCompra.getDate().getTime()),equipamentos);
+                    txtFrtDtCompra.getDate(),equipamentos);
         }else if( txtNumeroNota.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Favor informar numero de nota");
         }else if(equipamentos.isEmpty()){

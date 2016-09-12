@@ -7,9 +7,15 @@ package com.atacadao.almoxarifado.persistencia;
 
 import com.atacadao.almoxarifado.conectividade.Connections;
 import com.atacadao.almoxarifado.entidade.Entrada;
+import com.atacadao.almoxarifado.entidade.Equipamento;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +30,7 @@ public class entradaConexao {
         try {
              prepare = conn.prepareStatement(sql);
              prepare.setString(1, entrada.getNumeroNota());
-             prepare.setString(2, entrada.getDataCompra());
+             prepare.setDate(2, new Date(entrada.getDataCompra().getTime()));
              prepare.setDouble(3, entrada.getCusto());
              prepare.setString(4, entrada.getProdutos().toString());
              prepare.setString(5, entrada.getFornecedor());
@@ -43,4 +49,6 @@ public class entradaConexao {
             System.out.println("erro de conexão");
         }
     }
+    
+    
 }

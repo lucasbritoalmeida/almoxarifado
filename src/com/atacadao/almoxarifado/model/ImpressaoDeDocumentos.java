@@ -7,7 +7,6 @@ package com.atacadao.almoxarifado.model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.Doc;
@@ -20,8 +19,6 @@ import javax.print.ServiceUI;
 import javax.print.SimpleDoc;
 import javax.print.attribute.HashDocAttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttribute;
-import org.jfree.util.PrintStreamLogTarget;
 
 /**
  *

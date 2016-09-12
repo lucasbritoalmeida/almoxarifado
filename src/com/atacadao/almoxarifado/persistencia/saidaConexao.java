@@ -217,13 +217,14 @@ public class saidaConexao {
         String sql = "select * " +
                     "from saida " +
                     "where nome like ? " +
-                    "OR  codigo like ? " +
-                    "OR tipo like ? " +
-                    "OR numerosaida like ? " +
-                    "OR solicitante like ? " +
-                    "OR autorizado like ? " +
-                    "OR patrimonio like ? " +
-                    "AND datadesaida BETWEEN ? AND ?";
+                    "AND  codigo like ? " +
+                    "AND tipo like ? " +
+                    "AND numerosaida like ? " +
+                    "AND solicitante like ? " +
+                    "AND autorizado like ? " +
+                    "AND patrimonio like ? " +
+                    "AND datadesaida BETWEEN ? AND ?"
+                     + " ORDER BY datadesaida ASC";
         
         
             PreparedStatement prepare;

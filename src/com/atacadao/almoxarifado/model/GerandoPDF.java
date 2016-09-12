@@ -5,6 +5,7 @@
  */
 package com.atacadao.almoxarifado.model;
 
+import com.atacadao.almoxarifado.entidade.Entrada;
 import com.atacadao.almoxarifado.entidade.Equipamento;
 import com.atacadao.almoxarifado.entidade.Saida;
 import com.itextpdf.text.BaseColor;
@@ -29,9 +30,6 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPage;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.lowagie.text.pdf.PdfCell;
-import com.lowagie.text.pdf.PdfImage;
-import com.lowagie.text.pdf.PdfTable;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.print.PageFormat;
@@ -44,15 +42,13 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import org.apache.lucene.store.Directory;
 
 /**
  *
@@ -216,10 +212,11 @@ public class GerandoPDF {
     }
     
     public void pdfRelatorioSaida(ArrayList<Saida> saidas){
-        Document documento = new Document(PageSize.A4.rotate());
+        Double total = 0.0;
+        Document documento = new Document(PageSize.A4.rotate(),0,0,15,15);
 
         try {
-            PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("relatorios.pdf"));
+            PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("rSaidas.pdf"));
 
             Paragraph titulo = new Paragraph("Relatório de Saída\n\n", new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 20, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
@@ -228,50 +225,87 @@ public class GerandoPDF {
             documento.add(titulo);
             
             PdfPTable table = new PdfPTable(8);
-            PdfPCell cSaida = new PdfPCell(new Phrase("N° Saída"));
+            table.setTotalWidth(new float[] {10,(float) 13.5,(float) 11.5,(float) 13.5,(float) 13.5,(float) 13.5,(float) 12.5,10});
+            PdfPCell cSaida = new PdfPCell(new Phrase("N° Saída",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13,Font.BOLD, BaseColor.WHITE)));
             cSaida.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cNome = new PdfPCell(new Phrase("Nome"));
+            PdfPCell cNome = new PdfPCell(new Phrase("Nome",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
             cNome.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cPatrimonio = new PdfPCell(new Phrase("Patrimonio"));
+            PdfPCell cPatrimonio = new PdfPCell(new Phrase("Patrimonio",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 12, Font.BOLD, BaseColor.WHITE)));
             cPatrimonio.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cValor = new PdfPCell(new Phrase("Valor"));
-            cValor.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cSolic = new PdfPCell(new Phrase("Solicitante"));
+           
+            PdfPCell cSolic = new PdfPCell(new Phrase("Solicitante",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
             cSolic.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cAtut = new PdfPCell(new Phrase("Autorizado"));
+            PdfPCell cAtut = new PdfPCell(new Phrase("Autorizado",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
             cAtut.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cCodigo = new PdfPCell(new Phrase("Codigo"));
+            PdfPCell cCodigo = new PdfPCell(new Phrase("Codigo",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
             cCodigo.setBackgroundColor(BaseColor.DARK_GRAY);
-            PdfPCell cDtSaida = new PdfPCell(new Phrase("Dt Saída"));
+            PdfPCell cDtSaida = new PdfPCell(new Phrase("Dt Saída",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
             cDtSaida.setBackgroundColor(BaseColor.DARK_GRAY);
+             PdfPCell cValor = new PdfPCell(new Phrase("Valor",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cValor.setBackgroundColor(BaseColor.DARK_GRAY);
             
             table.addCell(cSaida);
             table.addCell(cNome);
             table.addCell(cPatrimonio);
-            table.addCell(cValor);
+            
             table.addCell(cSolic);
             table.addCell(cAtut);
             table.addCell(cCodigo);
             table.addCell(cDtSaida);
+            table.addCell(cValor);
             
             
             for (Saida saida : saidas) {
-              PdfPCell sai = new PdfPCell(new Phrase(saida.getRegistro()));
-              PdfPCell nomes = new PdfPCell(new Phrase(saida.getNome()));
-              PdfPCell patrimonios = new PdfPCell(new Phrase(saida.getPatrimonio()));
-              PdfPCell valores = new PdfPCell(new Phrase(String.valueOf(saida.getValor())));
-              PdfPCell solicitantes = new PdfPCell(new Phrase(saida.getSolicitador()));
-              PdfPCell autorizados = new PdfPCell(new Phrase(saida.getAutorizador()));
-              PdfPCell codigos = new PdfPCell(new Phrase(saida.getCodigo()));
-              PdfPCell datas = new PdfPCell(new Phrase(FormatosDeData.formatarLongParaDatas(saida.getDatasaida().getTime())));
+              DecimalFormat df = new DecimalFormat("#.##");
+              PdfPCell sai = new PdfPCell(new Phrase(saida.getRegistro(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell nomes = new PdfPCell(new Phrase(saida.getNome(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell patrimonios = new PdfPCell(new Phrase(saida.getPatrimonio(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               
-              table.addCell(sai);table.addCell(nomes);table.addCell(patrimonios);table.addCell(valores);
+              PdfPCell solicitantes = new PdfPCell(new Phrase(saida.getSolicitador(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell autorizados = new PdfPCell(new Phrase(saida.getAutorizador(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell codigos = new PdfPCell(new Phrase(saida.getCodigo(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 10, 0, BaseColor.BLACK)));
+              PdfPCell datas = new PdfPCell(new Phrase(FormatosDeData.formatarLongParaDatas(saida.getDatasaida().getTime()),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell valores = new PdfPCell(new Phrase("R$ " + String.valueOf(df.format(saida.getValor())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              
+              nomes.setVerticalAlignment(Element.ALIGN_CENTER);
+              nomes.setHorizontalAlignment(Element.ALIGN_CENTER);
+              nomes.setUseBorderPadding(true);
+              
+              solicitantes.setVerticalAlignment(Element.ALIGN_CENTER);
+              solicitantes.setHorizontalAlignment(Element.ALIGN_CENTER);
+              solicitantes.setUseBorderPadding(true);
+              
+              autorizados.setVerticalAlignment(Element.ALIGN_CENTER);
+              autorizados.setHorizontalAlignment(Element.ALIGN_CENTER);
+              autorizados.setUseBorderPadding(true);
+              
+              codigos.setVerticalAlignment(Element.ALIGN_CENTER);
+              codigos.setHorizontalAlignment(Element.ALIGN_CENTER);
+              
+              table.addCell(sai);table.addCell(nomes);table.addCell(patrimonios);
               table.addCell(solicitantes);table.addCell(autorizados);table.addCell(codigos);table.addCell(datas);
+              table.addCell(valores);
+              
+              total += saida.getValor();
             }
+    
+            Paragraph pTotal = new Paragraph("TOTAL",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 13, 0, BaseColor.WHITE));
+            pTotal.setAlignment(Element.ALIGN_LEFT);
+            PdfPCell cTotal = new PdfPCell(pTotal);            
+            cTotal.setBackgroundColor(BaseColor.DARK_GRAY);
+            cTotal.setColspan(6);
+            table.addCell(cTotal);
+            
+            DecimalFormat decValores = new DecimalFormat("#.##");
+            PdfPCell cValores = new PdfPCell(new Paragraph("R$ " + String.valueOf(decValores.format(total)),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.BLACK)));
+            cValores.setColspan(2);
+            table.addCell(cValores);
             
             documento.add(table);
+            
+            
             documento.close();
-            Desktop.getDesktop().open(new File("relatorios.pdf"));
+            Desktop.getDesktop().open(new File("rSaidas.pdf"));
         } catch (DocumentException | FileNotFoundException ex) {
             Logger.getLogger(GerandoPDF.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -279,6 +313,103 @@ public class GerandoPDF {
         }
             
     }    
+    
+    public void pdfRelatorioEntrada(ArrayList<Entrada> entradas){
+        Double total = 0.0;
+        Document documentos = new Document(PageSize.A4.rotate(),0,0,15,15);
+
+        try {
+            PdfWriter pdf = PdfWriter.getInstance(documentos, new FileOutputStream("rEntradas.pdf"));
+
+            Paragraph titulos = new Paragraph("Relatório de Entradas\n\n", new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 20, Font.BOLD));
+            titulos.setAlignment(Element.ALIGN_CENTER);
+            
+            documentos.open();
+            documentos.add(titulos); 
+            
+            PdfPTable tables = new PdfPTable(7);
+            tables.setTotalWidth(new float[] {10,(float) 13.5,(float) 11.5,(float) 13.5,(float) 13.5,(float) 13.5,10});
+            PdfPCell cSaida = new PdfPCell(new Phrase("N° Nota",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13,Font.BOLD, BaseColor.WHITE)));
+            cSaida.setBackgroundColor(BaseColor.DARK_GRAY);
+            PdfPCell cNome = new PdfPCell(new Phrase("Nome",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cNome.setBackgroundColor(BaseColor.DARK_GRAY);
+            PdfPCell cPatrimonio = new PdfPCell(new Phrase("Destino",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 12, Font.BOLD, BaseColor.WHITE)));
+            cPatrimonio.setBackgroundColor(BaseColor.DARK_GRAY);
+           
+            PdfPCell cSolic = new PdfPCell(new Phrase("Valor Equip",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cSolic.setBackgroundColor(BaseColor.DARK_GRAY);
+            PdfPCell cAtut = new PdfPCell(new Phrase("Fornecedor",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cAtut.setBackgroundColor(BaseColor.DARK_GRAY);
+            PdfPCell cCodigo = new PdfPCell(new Phrase("Dt Compra",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cCodigo.setBackgroundColor(BaseColor.DARK_GRAY);
+            PdfPCell cDtSaida = new PdfPCell(new Phrase("Valor",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER, 13, Font.BOLD, BaseColor.WHITE)));
+            cDtSaida.setBackgroundColor(BaseColor.DARK_GRAY);
+            
+            tables.addCell(cSaida);
+            tables.addCell(cNome);
+            tables.addCell(cPatrimonio);
+            
+            tables.addCell(cSolic);
+            tables.addCell(cAtut);
+            tables.addCell(cCodigo);
+            tables.addCell(cDtSaida);
+            
+            for (Entrada entrada : entradas) {
+              DecimalFormat df = new DecimalFormat("#.##");
+              PdfPCell sai = new PdfPCell(new Phrase(entrada.getNumeroNota(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell nomes = new PdfPCell(new Phrase(entrada.getNomeequipamento(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell patrimonios = new PdfPCell(new Phrase(entrada.getCodigoequip(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              
+              PdfPCell solicitantes = new PdfPCell(new Phrase(String.valueOf(df.format(entrada.getValorequip())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell autorizados = new PdfPCell(new Phrase(entrada.getFornecedor(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell codigos = new PdfPCell(new Phrase(FormatosDeData.formatarLongParaDatas(entrada.getDataCompra().getTime()),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 10, 0, BaseColor.BLACK)));
+              PdfPCell datas = new PdfPCell(new Phrase(String.valueOf(df.format(entrada.getCusto())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              
+              
+              nomes.setVerticalAlignment(Element.ALIGN_CENTER);
+              nomes.setHorizontalAlignment(Element.ALIGN_CENTER);
+              nomes.setUseBorderPadding(true);
+              
+              solicitantes.setVerticalAlignment(Element.ALIGN_CENTER);
+              solicitantes.setHorizontalAlignment(Element.ALIGN_CENTER);
+              solicitantes.setUseBorderPadding(true);
+              
+              autorizados.setVerticalAlignment(Element.ALIGN_CENTER);
+              autorizados.setHorizontalAlignment(Element.ALIGN_CENTER);
+              autorizados.setUseBorderPadding(true);
+              
+              codigos.setVerticalAlignment(Element.ALIGN_CENTER);
+              codigos.setHorizontalAlignment(Element.ALIGN_CENTER);
+              
+              tables.addCell(sai);tables.addCell(nomes);tables.addCell(patrimonios);
+              tables.addCell(solicitantes);tables.addCell(autorizados);tables.addCell(codigos);tables.addCell(datas);
+              
+              total += entrada.getCusto();
+            }
+            Paragraph pTotal = new Paragraph("TOTAL",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 13, 0, BaseColor.WHITE));
+            pTotal.setAlignment(Element.ALIGN_LEFT);
+            PdfPCell cTotal = new PdfPCell(pTotal);            
+            cTotal.setBackgroundColor(BaseColor.DARK_GRAY);
+            cTotal.setColspan(5);
+            tables.addCell(cTotal);
+            
+            DecimalFormat decValores = new DecimalFormat("#.##");
+            PdfPCell cValores = new PdfPCell(new Paragraph("R$ " + String.valueOf(decValores.format(total)),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.BLACK)));
+            cValores.setColspan(2);
+            tables.addCell(cValores);
+            
+            documentos.add(tables);
+            
+            
+            documentos.close();
+             Desktop.getDesktop().open(new File("rEntradas.pdf"));
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(GerandoPDF.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GerandoPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
     
     public void pdfImpressaoBarraDeCodigo(String codigo){
          Document documento =  new Document(new Rectangle(90, 65));
@@ -320,4 +451,5 @@ public class GerandoPDF {
         }
             
     }
+    
 }

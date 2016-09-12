@@ -42,6 +42,10 @@ public class Equipamento {
         this.valor = valor;
     }
 
+    public Equipamento(String string, String string0, double aDouble) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public String toString() {
         return "Equipamento{" + "patrimonio=" + patrimonio + ", nome=" + nome + ", validade=" + validade + ", situacao=" + situacao + ", codigo=" + codigo + ", tipo=" + tipo + '}';

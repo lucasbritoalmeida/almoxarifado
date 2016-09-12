@@ -27,17 +27,16 @@ public class NovoMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         GerandoPDF pdf = new GerandoPDF();
 //        ArrayList<Equipamento> equips = new ArrayList<>();
 //       equips.add(new Equipamento("patrimonio", "nome", Long.valueOf("1213545"), "situacao", "codigo", "tipo"));
 //        pdf.pdfDeSaida(equips, "solicitante", "autorizante", "responsavel", "numeroSaida");
 
-//    pdf.pdfImpressaoBarraDeCodigo("123456789");
+    pdf.pdfImpressaoBarraDeCodigo("123456789");
 
-        ArrayList<Saida> saidas = saidaConexao.buscarRelatorio("", "", "", "3239185099", "", "", "", null, null);
-        System.out.println(saidas);
-        pdf.pdfRelatorioSaida(saidas);
+//        ArrayList<Saida> saidas = saidaConexao.buscarRelatorio("", "", "", "3239185099", "", "", "", null, null);
+//        System.out.println(saidas);
+//        pdf.pdfRelatorioSaida(saidas);
     }
     
 }
