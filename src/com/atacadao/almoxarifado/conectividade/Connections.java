@@ -26,7 +26,7 @@ public class Connections {
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection("jdbc:postgresql://almoxarifado.postgresql.dbaas.com.br:5432/almoxarifado","almoxarifado","master");
         } catch (SQLException ex) {
-            System.out.println("com.atacadao.almoxarifado.Connections.getConnection() FALHA NA CONEXÃO");
+            System.out.println("AQUI ||| com.atacadao.almoxarifado.Connections.getConnection() FALHA NA CONEXÃO");
             return null;
         } catch (ClassNotFoundException ex) {
             System.out.println("com.atacadao.almoxarifado.Connections.getConnection() ERRO NA CLASS");

@@ -78,9 +78,7 @@ public class saidaConexao {
                 prepare.setString(10,autorizado);
                 prepare.setDate(11, new java.sql.Date(datadesaida.getTime()));
                 
-                prepare.execute();
-                
-                return Integer.toUnsignedString(numerosaida);
+                prepare.execute();                
                 
             } catch (SQLException ex) {
                 Logger.getLogger(saidaConexao.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,6 +89,7 @@ public class saidaConexao {
             if (!conn.isClosed()) {
                 conn.close();
                 prepare.close();
+                return Integer.toUnsignedString(numerosaida);
             }
         } catch (SQLException ex) {
             Logger.getLogger(saidaConexao.class.getName()).log(Level.SEVERE, null, ex);

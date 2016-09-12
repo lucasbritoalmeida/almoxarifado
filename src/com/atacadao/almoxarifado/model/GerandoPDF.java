@@ -9,7 +9,6 @@ import com.atacadao.almoxarifado.entidade.Entrada;
 import com.atacadao.almoxarifado.entidade.Equipamento;
 import com.atacadao.almoxarifado.entidade.Saida;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -18,27 +17,17 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.TabStop;
-import com.itextpdf.text.Utilities;
 import com.itextpdf.text.pdf.Barcode128;
-import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.PdfBody;
 import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfFormField;
-import com.itextpdf.text.pdf.PdfNumber;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfPage;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.print.PageFormat;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -360,10 +349,10 @@ public class GerandoPDF {
               PdfPCell nomes = new PdfPCell(new Phrase(entrada.getNomeequipamento(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               PdfPCell patrimonios = new PdfPCell(new Phrase(entrada.getCodigoequip(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               
-              PdfPCell solicitantes = new PdfPCell(new Phrase(String.valueOf(df.format(entrada.getValorequip())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell solicitantes = new PdfPCell(new Phrase("R$ " + String.valueOf(df.format(entrada.getValorequip())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               PdfPCell autorizados = new PdfPCell(new Phrase(entrada.getFornecedor(),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               PdfPCell codigos = new PdfPCell(new Phrase(FormatosDeData.formatarLongParaDatas(entrada.getDataCompra().getTime()),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 10, 0, BaseColor.BLACK)));
-              PdfPCell datas = new PdfPCell(new Phrase(String.valueOf(df.format(entrada.getCusto())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
+              PdfPCell datas = new PdfPCell(new Phrase("R$ " + String.valueOf(df.format(entrada.getCusto())),new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, 0, BaseColor.BLACK)));
               
               
               nomes.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -384,7 +373,7 @@ public class GerandoPDF {
               tables.addCell(sai);tables.addCell(nomes);tables.addCell(patrimonios);
               tables.addCell(solicitantes);tables.addCell(autorizados);tables.addCell(codigos);tables.addCell(datas);
               
-              total += entrada.getCusto();
+              total += entrada.getValorequip();
             }
             Paragraph pTotal = new Paragraph("TOTAL",new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 13, 0, BaseColor.WHITE));
             pTotal.setAlignment(Element.ALIGN_LEFT);
