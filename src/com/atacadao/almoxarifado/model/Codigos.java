@@ -16,7 +16,8 @@ public enum Codigos {
     ESC("ESCRITORIO",4),
     LIMP("LIMPEZA",5),
     LJ("LOJA",6),
-    ALIM("ALIMENTACAO",7);
+    ALIM("ALIMENTACAO",7),
+    CAM("CAMINHAO",8);
     
     private String codigo;
     private Integer numero;

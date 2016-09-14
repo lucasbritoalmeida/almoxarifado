@@ -100,7 +100,7 @@ public class CadastrarEquipamentos extends javax.swing.JInternalFrame {
 
         txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "COMPRA", "ALUGUEL" }));
 
-        txtCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "MAN", "INF", "CX", "ESC", "LIMP", "LJ", "ALIM" }));
+        txtCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "MAN", "INF", "CX", "ESC", "LIMP", "LJ", "ALIM", "CAM" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

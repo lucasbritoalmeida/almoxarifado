@@ -179,7 +179,12 @@ public class EntradaDeNotas extends javax.swing.JInternalFrame {
 
         txtSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Excelente", "Boa", "Regular", "Ruim", "Em Manutenção" }));
 
-        txtCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "MAN", "INF", "CX", "ESC", "LIMP", "LJ", "ALIM" }));
+        txtCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "MAN", "INF", "CX", "ESC", "LIMP", "LJ", "ALIM", "CAM" }));
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
 
         txtTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "COMPRA", "ALUGUEL" }));
 
@@ -371,7 +376,7 @@ public class EntradaDeNotas extends javax.swing.JInternalFrame {
         
         if (!equipamentos.isEmpty() & !txtNumeroNota.getText().trim().equals("")) {
             equipamentoConexao.CasdastrarVarios(equipamentos);
-            registroConexao.Cadastrar(txtNumeroNota.getText(),txtFornecedor.getText(),FormatandoDouble.FormatandoValores(txtCusto.getText()),
+            registroConexao.Cadastrar(txtNumeroNota.getText().toUpperCase(),txtFornecedor.getText().toUpperCase(),FormatandoDouble.FormatandoValores(txtCusto.getText()),
                     txtFrtDtCompra.getDate(),equipamentos);
         }else if( txtNumeroNota.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Favor informar numero de nota");
@@ -391,6 +396,10 @@ public class EntradaDeNotas extends javax.swing.JInternalFrame {
     private void txtCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCustoActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

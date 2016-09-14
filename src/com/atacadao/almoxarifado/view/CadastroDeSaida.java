@@ -544,9 +544,9 @@ public class CadastroDeSaida extends javax.swing.JInternalFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
         ArrayList<Equipamento> equipamento = null;
         
-        equipamento = equipamentoConexao.consultar(new Equipamento(txtPatrimonio.getText(), txtNome.getText()
+        equipamento = equipamentoConexao.consultar(new Equipamento(txtPatrimonio.getText().toUpperCase(), txtNome.getText().toUpperCase()
                 , FormatosDeData.formatarDatasParaLong(jFrtData.getText())
-                , String.valueOf(txtSituacao.getSelectedItem()).toUpperCase(), txtCodigo.getText(), txtTipo.getText()
+                , String.valueOf(txtSituacao.getSelectedItem()).toUpperCase(), txtCodigo.getText().toUpperCase(), txtTipo.getText().toUpperCase()
                 , FormatandoDouble.FormatandoValores(txtFrtValor.getText())), (Integer) JSpinnerQtd.getValue());
         
         

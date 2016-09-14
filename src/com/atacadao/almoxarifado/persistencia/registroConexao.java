@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,5 +137,45 @@ public static ArrayList<Entrada> buscarRelatorio(String nota, String nomeequipam
         }
         return null;
     }
+
+public static ArrayList<String> relatorioSimples(Date dataorigem, Date datafinal){
+    
+    ArrayList<String> results = new ArrayList<>();
+    
+    Connection conn = Connections.getConnection();
+    String sql = "SELECT nomeequipamento, COUNT(*) AS quantidade,SUM(valorequip) AS soma,AVG(valorequip) as unidade " +
+                "FROM registro " +
+                "WHERE datadacompra BETWEEN ? AND ? " +
+                "GROUP BY nomeequipamento";
+    
+    try {
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setDate(1, new java.sql.Date(dataorigem.getTime()));
+        preparedStatement.setDate(2, new java.sql.Date(datafinal.getTime()));
+        
+        ResultSet executeQuery = preparedStatement.executeQuery();
+        
+        while (executeQuery.next()) {            
+            results.add(executeQuery.getString("nomeequipamento")+"|"+
+            String.valueOf(executeQuery.getInt("quantidade"))+"|"+
+            String.valueOf(executeQuery.getDouble("soma"))+"|"+
+            String.valueOf(executeQuery.getDouble("unidade")));
+        }
+        System.out.println(dataorigem + " === " + datafinal);
+        if (results.isEmpty()) {
+            conn.close();
+            preparedStatement.close();
+            return null;
+        }else{
+            conn.close();
+            preparedStatement.close();
+            return results;
+        }
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(registroConexao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+}
     
 }
