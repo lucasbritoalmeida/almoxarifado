@@ -8,7 +8,6 @@ package com.atacadao.almoxarifado.persistencia;
 import java.sql.Connection;
 import com.atacadao.almoxarifado.conectividade.Connections;
 import com.atacadao.almoxarifado.entidade.Usuario;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -191,6 +190,41 @@ public class usuarioConexao {
                 Logger.getLogger(usuarioConexao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    } 
+    public static Usuario buscarUsuarioPorLogin(String login){
+        Connection conn = Connections.getConnection();
+        String sql = "select * from usuarios where login like ?";
+        PreparedStatement prepare = null;
+        
+        Usuario user = null;
+        
+        try {
+            prepare = conn.prepareStatement(sql);
+            prepare.setString(1, "%" + login + "%");
+            
+            
+            ResultSet resultSet = prepare.executeQuery();
+            
+            while(resultSet.next()) {                       
+                 user = new Usuario(resultSet.getString("nome"),resultSet.getString("sobrenome") , resultSet.getInt("id")
+                        ,resultSet.getString("senha") , resultSet.getString("login"), resultSet.getString("niveis"), resultSet.getString("local"));
+            }
+            
+                if (!conn.isClosed()) {
+                    conn.close();
+                    return user;
+                }
+        } catch (SQLException ex) {
+            try {
+                conn.close();
+                Logger.getLogger(usuarioConexao.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (SQLException ex1) {
+                Logger.getLogger(usuarioConexao.class.getName()).log(Level.SEVERE, null, ex1);
+                return null;
+            }
+        }
+        return null;
     } 
     
     public static ArrayList<Usuario> buscarTodos(){

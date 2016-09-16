@@ -205,7 +205,15 @@ public class GerandoPDF {
         Document documento = new Document(PageSize.A4.rotate(),0,0,15,15);
 
         try {
-            PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("rSaidas.pdf"));
+            
+            Path path = Paths.get("\\files\\rSaidas.pdf");
+            
+            if (!Files.isDirectory(path.getParent())) {
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
+            }
+            
+            PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("\\files\\rSaidas.pdf"));
 
             Paragraph titulo = new Paragraph("Relatório de Saída\n\n", new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 20, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
@@ -294,7 +302,7 @@ public class GerandoPDF {
             
             
             documento.close();
-            Desktop.getDesktop().open(new File("rSaidas.pdf"));
+            ImpressaoDeDocumentos imprimir = new ImpressaoDeDocumentos("\\files\\rSaidas.pdf");
         } catch (DocumentException | FileNotFoundException ex) {
             Logger.getLogger(GerandoPDF.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -308,7 +316,15 @@ public class GerandoPDF {
         Document documentos = new Document(PageSize.A4.rotate(),0,0,15,15);
 
         try {
-            PdfWriter pdf = PdfWriter.getInstance(documentos, new FileOutputStream("rEntradas.pdf"));
+            
+             Path path = Paths.get("\\files\\rEntradas.pdf");
+            
+            if (!Files.isDirectory(path.getParent())) {
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
+            }
+            
+            PdfWriter pdf = PdfWriter.getInstance(documentos, new FileOutputStream("\\files\\rEntradas.pdf"));
 
             Paragraph titulos = new Paragraph("Relatório de Entradas\n\n", new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 20, Font.BOLD));
             titulos.setAlignment(Element.ALIGN_CENTER);
@@ -391,7 +407,7 @@ public class GerandoPDF {
             
             
             documentos.close();
-             Desktop.getDesktop().open(new File("rEntradas.pdf"));
+             ImpressaoDeDocumentos impressaoDeDocumentos = new ImpressaoDeDocumentos("\\files\\rEntradas.pdf");
         } catch (DocumentException | FileNotFoundException ex) {
             Logger.getLogger(GerandoPDF.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

@@ -41,31 +41,44 @@ public class Main extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jSeparator2 = new javax.swing.JSeparator();
         jMenu7 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem8 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenu10 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem10 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         jMenu7.setText("jMenu7");
+
+        jMenuItem11.setText("jMenuItem11");
+
+        jMenu9.setText("jMenu9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +101,7 @@ public class Main extends javax.swing.JFrame {
         jMenu2.setText("Arquivo");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/exit.png"))); // NOI18N
         jMenuItem6.setText("Sair");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +115,7 @@ public class Main extends javax.swing.JFrame {
         jMenu3.setText("Usuários");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/group.png"))); // NOI18N
         jMenuItem1.setText("Consultar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +123,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem1);
+        jMenu3.add(jSeparator5);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/user.png"))); // NOI18N
         jMenuItem2.setText("Cadastrar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,8 +139,10 @@ public class Main extends javax.swing.JFrame {
         jMenu4.setText("Almoxarifado");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/trolley.png"))); // NOI18N
         jMenu5.setText("Equipamento");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/bag.png"))); // NOI18N
         jMenuItem4.setText("Cadastrar");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +150,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem4);
+        jMenu5.add(jSeparator6);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/cart.png"))); // NOI18N
         jMenuItem3.setText("Excluir / Atualizar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,8 +164,10 @@ public class Main extends javax.swing.JFrame {
         jMenu4.add(jMenu5);
         jMenu4.add(jSeparator1);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/package.png"))); // NOI18N
         jMenu6.setText("Entradas");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/contract.png"))); // NOI18N
         jMenuItem5.setText("Entrada de Notas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +175,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem5);
+        jMenu6.add(jSeparator7);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/file.png"))); // NOI18N
         jMenuItem8.setText("Consulta de Entradas");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,8 +189,10 @@ public class Main extends javax.swing.JFrame {
         jMenu4.add(jMenu6);
         jMenu4.add(jSeparator3);
 
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/shopping-basket.png"))); // NOI18N
         jMenu8.setText("Saidas");
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/receipt.png"))); // NOI18N
         jMenuItem7.setText("Saida de Notas");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +200,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem7);
+        jMenu8.add(jSeparator8);
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/bag.png"))); // NOI18N
         jMenuItem9.setText("Devolução");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +214,22 @@ public class Main extends javax.swing.JFrame {
         jMenu4.add(jMenu8);
         jMenu4.add(jSeparator4);
 
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/deal.png"))); // NOI18N
+        jMenu10.setText("Solicitações");
+
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/conversation.png"))); // NOI18N
+        jMenuItem12.setText("Pedidos");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem12);
+
+        jMenu4.add(jMenu10);
+        jMenu4.add(jSeparator9);
+
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/atacadao/almoxarifado/imagens/wallet (1).png"))); // NOI18N
         jMenuItem10.setText("Relatorios");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +250,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -310,6 +355,17 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        Pedidos pedidos = new Pedidos();
+        jDesktopPane1.add(pedidos);
+        pedidos.setVisible(true);
+        try {
+            pedidos.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +405,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -356,9 +413,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -371,6 +431,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

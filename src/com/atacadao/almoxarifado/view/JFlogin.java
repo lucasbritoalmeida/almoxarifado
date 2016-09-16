@@ -5,6 +5,7 @@
  */
 package com.atacadao.almoxarifado.view;
 
+import com.atacadao.almoxarifado.model.CacheUsuario;
 import com.atacadao.almoxarifado.persistencia.usuarioConexao;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -158,6 +159,8 @@ public class JFlogin extends javax.swing.JFrame {
         }
         
         if (usuarioConexao.autenticar(txtUsuario.getText().toLowerCase(), password)) {
+            CacheUsuario.salvandoUsuarios(txtUsuario.getText().toLowerCase());
+            
             Main users = new Main();
             jLabel3.setText("");
             users.setVisible(true);

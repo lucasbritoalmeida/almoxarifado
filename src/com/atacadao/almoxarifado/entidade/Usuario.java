@@ -5,11 +5,13 @@
  */
 package com.atacadao.almoxarifado.entidade;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lucas
  */
-public class Usuario {
+public class Usuario implements Serializable{
     
         private String nome;
         private String sobrenome;
@@ -17,7 +19,18 @@ public class Usuario {
         private String senha;
         private String login;
         private String niveis;
+        private String local;
 
+    public Usuario(String nome, String sobrenome, int id, String senha, String login, String niveis, String local) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.id = id;
+        this.senha = senha;
+        this.login = login;
+        this.niveis = niveis;
+        this.local = local;
+    }
+        
     public Usuario(String nome, String sobrenome, int id, String senha, String login, String niveis) {
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -90,6 +103,14 @@ public class Usuario {
 
     public void setNiveis(String niveis) {
         this.niveis = niveis;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     @Override
